@@ -10,7 +10,8 @@ import { useFonts, Montserrat_400Regular, Montserrat_700Bold } from '@expo-googl
 import Imagens from './telas/Cesta';
 import SobreNos from './telas/SobreNos';
 import Produtos from './telas/Produtos';
-import MinhaCesta from './telas/MinhaCesta';
+import MinhaCesta from './telas/Aula Lista de Desejos/Lista';
+import ListaDeDesejos from './telas/Aula Minha Cesta/MinhaCesta';
 
 // function Inicio() {
 //   return <SafeAreaView>
@@ -45,11 +46,15 @@ function TabsMenu() {
             iconName = focused
               ? 'book'
               : 'book-outline';
-          } else if (route.name === 'Minha cesta') {
+          } else if (route.name === 'Lista de desejos') {
+            iconName = focused
+              ? 'heart'
+              : 'heart-outline';
+          }else if (route.name === 'Minha cesta') {
             iconName = focused
               ? 'list'
               : 'list-outline';
-          }
+          } 
           
           // You can return any component that you like here!
           return <Ionicons name={ iconName } size={ size } color={ color } />;
@@ -61,7 +66,8 @@ function TabsMenu() {
       <Tab.Screen name="Inicio" component={Imagens} />
       <Tab.Screen name="Sobre nós" component={SobreNos} />
       <Tab.Screen name="Produtos" component={Produtos} />
-      <Tab.Screen name="Minha Cesta" component={MinhaCesta} />
+      <Tab.Screen name="Lista de desejos" component={MinhaCesta} />
+      <Tab.Screen name="Minha cesta" component={ListaDeDesejos} />
     </Tab.Navigator>
   );
 }

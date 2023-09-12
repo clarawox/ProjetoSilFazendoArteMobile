@@ -7,32 +7,32 @@ import Contatos from '../../src/componentes/Contatos';
 import Texto from '../../src/componentes/Texto';
 import Carrossel from '../../src/mocks/Carrossel'
 
-import Prod1 from '../../assets/produtos/prod1.png';
-import Prod2 from '../../assets/produtos/prod2.png';
-import Prod3 from '../../assets/produtos/prod3.png';
-import Prod4 from '../../assets/produtos/prod4.png';
-import Prod5 from '../../assets/produtos/prod5.png';
+import bolsa1 from '../../assets/produtos/bolsa1.png';
+import bolsa2 from '../../assets/produtos/bolsa2.png';
+import bolsa3 from '../../assets/produtos/bolsa3.png';
+import tapete1 from '../../assets/produtos/tapete1.png';
+import tapete2 from '../../assets/produtos/tapete2.png';
 import Imagem from '../../assets/Imagem.png';
 
 const { width } = Dimensions.get('window');
 
 const DATA = [
   {
-    coverImageUri: Prod1,
+    coverImageUri: bolsa1,
     cornerLabelColor: '#FFD300',
     cornerLabelText: 'Novidade',
   },
   {
-    coverImageUri: Prod2
+    coverImageUri: bolsa2
   },
   {
-    coverImageUri: Prod3
+    coverImageUri: bolsa3
   },
   {
-    coverImageUri: Prod4
+    coverImageUri: tapete1
   },
   {
-    coverImageUri: Prod5
+    coverImageUri: tapete2
   },
 ];
 
