@@ -1,5 +1,6 @@
-import React from 'react';
+import { React, useEffect, useRef, useState} from 'react';
 import { StyleSheet, View, Image, Dimensions, ScrollView } from 'react-native';
+import { Video, ResizeMode, Audio } from 'expo-av';
 import Carousel, { PaginationLight } from 'react-native-x-carousel';
 
 import Cabecalho from '../../src/componentes/Cabecalho';
@@ -13,6 +14,8 @@ import bolsa3 from '../../assets/produtos/bolsa3.png';
 import tapete1 from '../../assets/produtos/tapete1.png';
 import tapete2 from '../../assets/produtos/tapete2.png';
 import Imagem from '../../assets/Imagem.png';
+import babyCats from '../../assets/babyCats.mp4';
+import { Button } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -50,6 +53,25 @@ const Imagens = () => {
     </View>
   );
 
+  const video = useRef(null);
+  const [Status, setStatus] = useState({});
+
+  const [audioStatus, setAudioStatus]=useState(false);
+  const [sound, setSound]=useState(new Audio.Sound())
+
+  useEffect(()=>{
+    (async()=>{
+      console.log('status', audioStatus)
+      if(audioStatus){
+        await sound.loadAsync(require('../../assets/audio.mp3'))
+        try {await sound.playAsync()} catch(e){console.log(e)}
+      }else{
+        await sound.stopAsync()
+        await sound.unloadAsync()
+      }
+      })()
+    }, [audioStatus]);
+
   return (
     <View style={styles.container}>
       <Cabecalho />
@@ -74,8 +96,20 @@ const Imagens = () => {
 
         <View style={styles.line} />
 
-        <Contatos/>
-        
+        <Texto style={styles.titulo}>🐾Nós:</Texto>
+        <Video ref={video}
+          style={styles.video}
+          source={babyCats}
+          useNativeControls
+          resizeMode={ResizeMode.CONTAIN}
+          isLooping
+          onPlaybackStatusUpdate={status => setStatus(() => status)} />
+
+        <View style={styles.line} />
+        <Contatos />
+        <View style={styles.line} />
+        <Button color={audioStatus?'purple':'black'} title={'▶'} 
+        onPress={()=>setAudioStatus(!audioStatus)}/>
       </ScrollView>
     </View>
   );
@@ -148,9 +182,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   line: {
-    paddingTop:10, 
+    paddingTop: 10,
     borderBottomColor: '#660066',
     borderBottomWidth: 2,
+  },
+  video: {
+    alignSelf: 'center',
+    width: 400,
+    height: 400,
   },
 });
 

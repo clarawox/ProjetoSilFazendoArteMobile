@@ -10,8 +10,8 @@ import { useFonts, Montserrat_400Regular, Montserrat_700Bold } from '@expo-googl
 import Imagens from './telas/Cesta';
 import SobreNos from './telas/SobreNos';
 import Produtos from './telas/Produtos';
-import MinhaCesta from './telas/Aula Lista de Desejos/Lista';
-import ListaDeDesejos from './telas/Aula Minha Cesta/MinhaCesta';
+import MinhaCesta from './telas/Lista de Desejos/Lista';
+import ListaDeDesejos from './telas/Minha Cesta/MinhaCesta';
 
 // function Inicio() {
 //   return <SafeAreaView>
