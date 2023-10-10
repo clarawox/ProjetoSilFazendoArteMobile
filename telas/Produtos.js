@@ -1,12 +1,11 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { AsyncStorage } from 'react-native';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
 import Cabecalho from '../src/componentes/Cabecalho';
-import Texto from '../src/componentes/Texto';
-import Carrossel from '../src/mocks/Carrossel'
-import Itens from '../src/componentes/Itens';
+import Produto from '../telas/Produto'
 
 export default function Produtos() {
     return (
@@ -25,55 +24,7 @@ export default function Produtos() {
             <View style={styles.line}/>
 
             <ScrollView>
-                <Texto style={styles.titulo}>{Carrossel.Imagens.produtos}</Texto>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <Itens img={require('../assets/produtos/bolsa1.png')} cost='R$39,99'>Produto 1</Itens>
-                    <Itens img={require('../assets/produtos/bolsa2.png')} cost='R$39,99'>Produto 2</Itens>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <Itens img={require('../assets/produtos/bolsa3.png')} cost='R$39,99'>Produto 3</Itens>
-                    <Itens img={require('../assets/produtos/tapete1.png')} cost='R$39,99'>Produto 4</Itens>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <Itens img={require('../assets/produtos/tapete2.png')} cost='R$39,99'>Produto 5</Itens>
-                    <Itens img={require('../assets/produtos/kitBanheiro.png')} cost='R$39,99'>Produto 6</Itens>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <Itens img={require('../assets/produtos/7.png')} cost='R$39,99'>Produto 7</Itens>
-                    <Itens img={require('../assets/produtos/9.png')} cost='R$39,99'>Produto 8</Itens>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <Itens img={require('../assets/produtos/10.png')} cost='R$39,99'>Produto 9</Itens>
-                    <Itens img={require('../assets/produtos/12.png')} cost='R$39,99'>Produto 10</Itens>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <Itens img={require('../assets/produtos/13.png')} cost='R$39,99'>Produto 11</Itens>
-                    <Itens img={require('../assets/produtos/14.png')} cost='R$39,99'>Produto 12</Itens>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <Itens img={require('../assets/produtos/15.png')} cost='R$39,99'>Produto 13</Itens>
-                    <Itens img={require('../assets/produtos/16.png')} cost='R$39,99'>Produto 14</Itens>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <Itens img={require('../assets/produtos/18.png')} cost='R$39,99'>Produto 15</Itens>
-                    <Itens img={require('../assets/produtos/19.png')} cost='R$39,99'>Produto 16</Itens>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <Itens img={require('../assets/produtos/20.png')} cost='R$39,99'>Produto 17</Itens>
-                    <Itens img={require('../assets/produtos/21.png')} cost='R$39,99'>Produto 18</Itens>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <Itens img={require('../assets/produtos/22.png')} cost='R$39,99'>Produto 19</Itens>
-                    <Itens img={require('../assets/produtos/23.png')} cost='R$39,99'>Produto 20</Itens>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <Itens img={require('../assets/produtos/24.png')} cost='R$39,99'>Produto 21</Itens>
-                    <Itens img={require('../assets/produtos/25.png')} cost='R$39,99'>Produto 22</Itens>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <Itens img={require('../assets/produtos/26.png')} cost='R$39,99'>Produto 23</Itens>
-                    <Itens img={require('../assets/produtos/27.png')} cost='R$39,99'>Produto 24</Itens>
-                </View>
+                <Produto/>
             </ScrollView>
         </View>
     )

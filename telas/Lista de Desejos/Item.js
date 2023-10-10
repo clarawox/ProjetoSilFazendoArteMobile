@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
-import { View, Button, TouchableOpacity, Image } from "react-native"
+import { View, Button, TouchableOpacity, Image } from "react-native";
+import  AsyncStorage  from '@react-native-async-storage/async-storage';
 
 import Texto from '../../src/componentes/Texto';
 import estilosMinhaCesta from "../Minha Cesta/estilosMinhaCesta";
 import CampoInteiro from "../../src/componentes/CampoInteiro";
 
-export default function Item({ nome, descricao, preco, img }) {
+export default function Item({ id, nome, descricao, preco, img }) {
 
     const [quantidade, setQuantidade] = useState(1);
 
@@ -25,8 +26,38 @@ export default function Item({ nome, descricao, preco, img }) {
     const inverteExpandir = () => {
         setExpandir(!expandir);
 
-        //retorna a qiantidade para o estado padrão
+        //retorna a quantidade para o estado padrão
         atualizaQtdeTotal(1);
+    }
+
+    async function addListaDesejos(id, img, nome, preco, descricao, quantidade){
+        const addProd = [{
+            id: id,
+            img: img,
+            nome: nome,
+            preco: preco,
+            descricao: descricao,
+            quantidade: quantidade,
+        }]
+        
+
+        const listaDesejosSalva = await AsyncStorage.getItem('ListaDesejos');
+        // console.log(listaDesejosSalva);
+
+        if(listaDesejosSalva!==null){
+            const listaDesejos = JSON.parse(listaDesejosSalva);
+
+            listaDesejos.push({id:id,nome: nome, preco: preco, descricao: descricao, quantidade: quantidade});
+
+            const listaAtualizada = JSON.stringify(listaDesejos);
+            await AsyncStorage.setItem('ListaDesejos', listaAtualizada);
+            console.log('Inseriu mais um item na lista');
+            
+        } else {
+            const listaAtualizada = JSON.stringify(addProd);
+            await AsyncStorage.setItem('ListaDesejos', listaAtualizada);
+            console.log('Inseriu o item na lista');
+        }
     }
 
     return <>
@@ -48,7 +79,7 @@ export default function Item({ nome, descricao, preco, img }) {
                     <Texto>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total)}</Texto>
                 </View>
 
-                <Button title="Adicionar" />
+                <Button title="Adicionar" onPress={()=> addListaDesejos(id, nome, preco, descricao, quantidade)}/>
 
             </View>
         }

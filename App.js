@@ -26,7 +26,7 @@ function TabsMenu() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarStyle:{
+        tabBarStyle: {
           backgroundColor: "#660066",
         },
         headerShown: false,
@@ -37,11 +37,11 @@ function TabsMenu() {
             iconName = focused
               ? 'paw'
               : 'paw-outline';
-           } else if (route.name === 'Produtos') {
+          } else if (route.name === 'Produtos') {
             iconName = focused
               ? 'grid'
               : 'grid-outline';
-          
+
           } else if (route.name === 'Sobre nós') {
             iconName = focused
               ? 'book'
@@ -50,14 +50,14 @@ function TabsMenu() {
             iconName = focused
               ? 'heart'
               : 'heart-outline';
-          }else if (route.name === 'Minha cesta') {
+          } else if (route.name === 'Minha cesta') {
             iconName = focused
               ? 'list'
               : 'list-outline';
-          } 
-          
+          }
+
           // You can return any component that you like here!
-          return <Ionicons name={ iconName } size={ size } color={ color } />;
+          return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: 'pink',
@@ -67,7 +67,7 @@ function TabsMenu() {
       <Tab.Screen name="Sobre nós" component={SobreNos} />
       <Tab.Screen name="Produtos" component={Produtos} />
       <Tab.Screen name="Lista de desejos" component={MinhaCesta} />
-      <Tab.Screen name="Minha cesta" component={ListaDeDesejos} />
+      <Tab.Screen name="Minha cesta" component={ListaDeDesejos} options={{unmountOnBlur: true}}/>
     </Tab.Navigator>
   );
 }
@@ -87,7 +87,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <StatusBar style="light" backgroundColor="#FFF" translucent={true}/>
+      <StatusBar style="light" backgroundColor="#FFF" translucent={true} />
       <TabsMenu />
     </NavigationContainer>
   );
