@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { View, Button, TouchableOpacity, Image } from "react-native";
-import  AsyncStorage  from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Texto from '../../src/componentes/Texto';
 import estilosMinhaCesta from "../Minha Cesta/estilosMinhaCesta";
@@ -30,29 +30,30 @@ export default function Item({ id, nome, descricao, preco, img }) {
         atualizaQtdeTotal(1);
     }
 
-    async function addListaDesejos(id, img, nome, preco, descricao, quantidade){
+    async function addListaDesejos(id, nome, preco, descricao, quantidade) {
         const addProd = [{
             id: id,
-            img: img,
+            // img: img,
             nome: nome,
             preco: preco,
             descricao: descricao,
             quantidade: quantidade,
         }]
-        
+
 
         const listaDesejosSalva = await AsyncStorage.getItem('ListaDesejos');
-        // console.log(listaDesejosSalva);
+        console.log(listaDesejosSalva);
 
-        if(listaDesejosSalva!==null){
+        if (listaDesejosSalva !== null) {
             const listaDesejos = JSON.parse(listaDesejosSalva);
 
-            listaDesejos.push({id:id,nome: nome, preco: preco, descricao: descricao, quantidade: quantidade});
+            listaDesejos.push({ id: id, nome: nome, preco: preco, descricao: descricao, quantidade: quantidade });
 
             const listaAtualizada = JSON.stringify(listaDesejos);
             await AsyncStorage.setItem('ListaDesejos', listaAtualizada);
             console.log('Inseriu mais um item na lista');
-            
+            console.log(listaAtualizada);
+
         } else {
             const listaAtualizada = JSON.stringify(addProd);
             await AsyncStorage.setItem('ListaDesejos', listaAtualizada);
@@ -62,8 +63,8 @@ export default function Item({ id, nome, descricao, preco, img }) {
 
     return <>
         <TouchableOpacity style={estilosMinhaCesta.margem} onPress={inverteExpandir}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding:25}}>
-                <Image style={estilosMinhaCesta.image} source={img}/>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 25 }}>
+                <Image style={estilosMinhaCesta.image} source={img} />
                 <Texto style={estilosMinhaCesta.nome}>{nome}</Texto>
             </View>
             <Texto style={estilosMinhaCesta.descricao}>{descricao}</Texto>
@@ -79,7 +80,7 @@ export default function Item({ id, nome, descricao, preco, img }) {
                     <Texto>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total)}</Texto>
                 </View>
 
-                <Button title="Adicionar" onPress={()=> addListaDesejos(id, nome, preco, descricao, quantidade)}/>
+                <Button title="Adicionar" onPress={() => addListaDesejos(id, nome, preco, descricao, quantidade)} />
 
             </View>
         }
