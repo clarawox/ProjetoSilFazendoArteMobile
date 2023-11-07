@@ -5,10 +5,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Item from './Item';
 import StatusListaDesejos from '../../src/componentes/StatusListaDesejo';
 
-import bolsa1 from '../../assets/produtos/bolsa1.png';
-import bolsa2 from '../../assets/produtos/bolsa2.png';
-import bolsa3 from '../../assets/produtos/bolsa3.png';
-
 export default function MinhaCesta() {
 
     const [lista, setLista] = useState([]);
@@ -18,12 +14,6 @@ export default function MinhaCesta() {
         if (storedList !== null) {
             setLista(JSON.parse(storedList));
         }
-    }
-
-    const handleRemoveItem = (itemId) => {
-        const updatedList = lista.filter(item => item.id !== itemId);
-        setLista(updatedList);
-        AsyncStorage.setItem('ListaDesejos', JSON.stringify(updatedList));
     }
 
     useEffect(() => {
@@ -36,7 +26,7 @@ export default function MinhaCesta() {
         <View style={styles.container}>
             <FlatList
                 data={lista}
-                renderItem={({ item }) => (<Item {...item} onRemoveItem={handleRemoveItem()}  />)}
+                renderItem={({ item }) => (<Item {...item} />)}
                 keyExtractor={({ id }) => (String(id))}
             />
             <StatusListaDesejos total={total} />

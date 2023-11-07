@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { View, Button, TouchableOpacity, Image } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import Texto from '../../src/componentes/Texto';
 import estilosMinhaCesta from "../Minha Cesta/estilosMinhaCesta";
 import CampoInteiro from "../../src/componentes/CampoInteiro";
@@ -33,7 +32,7 @@ export default function Item({ id, nome, descricao, preco, img }) {
     async function addListaDesejos(id, nome, preco, descricao, quantidade) {
         const addProd = [{
             id: id,
-            // img: img,
+            img: img,
             nome: nome,
             preco: preco,
             descricao: descricao,
@@ -80,8 +79,7 @@ export default function Item({ id, nome, descricao, preco, img }) {
                     <Texto>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total)}</Texto>
                 </View>
 
-                <Button title="Adicionar" onPress={() => addListaDesejos(id, nome, preco, descricao, quantidade)} />
-
+                <Button title="Adicionar" onPress={() => addListaDesejos(id, nome, preco, descricao, quantidade)} /> 
             </View>
         }
         <View style={estilosMinhaCesta.divisor}></View>
