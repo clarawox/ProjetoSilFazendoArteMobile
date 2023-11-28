@@ -15,6 +15,10 @@ const Carrossel = {
         prod:"🐾Sobre Os Nossos Produtos:",
         descritivo: "A SilFazendoArte é uma empresa independente de produtos 100% artesanais, desde 2021 criando produtos que decorem e embelezem você e sua casa. A dedicação à produção dos produtos (e o amor pelos gatinhos) é o que nos move. Sejam muito bem vindos ao nosso app, esperamos que gostem!",
         descprod: "Nossos são feitos 100% a mão com muito carinho e com materiais de qualidade, afinal esperamos sempre entregar um trabalho que além de bonito, tenha uma boa durabilidade. Desde o inicio da produção pensamos exclusivamente em nosso cliente!"
+    },
+    produtos:{
+        tituloProd: "🐾Nossos Produtos:",
+        tituloCesta: "🐾Seus Produtos:"
     }
 }
 

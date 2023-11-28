@@ -1,7 +1,10 @@
 import React from 'react';
 import { SafeAreaView, FlatList, StatusBar } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Cabecalho from '../../src/componentes/Cabecalho';
 import Item from './Item';
+import Texto from '../../src/componentes/Texto';
+import Carrossel from '../../src/mocks/Carrossel';
 
 const produtos = [
     {
@@ -10,7 +13,6 @@ const produtos = [
         nome: "Bolsa de croche",
         preco: 39.90,
         descricao: "Bolsa de croche azul no formato retangular com fivela metálica",
-        quantidade: 1
     },
     {
         id: 2,
@@ -18,7 +20,6 @@ const produtos = [
         nome: "Bolsa de croche",
         preco: 39.90,
         descricao: "Bolsa de croche branca no formato circular",
-        quantidade: 2
     },
     {
         id: 3,
@@ -26,7 +27,6 @@ const produtos = [
         nome: "Bolsa de croche",
         preco: 39.90,
         descricao: "Bolsa de croche rosa no formato retangular",
-        quantidade: 2
     },
     {
         id: 4,
@@ -34,7 +34,6 @@ const produtos = [
         nome: "Tapete de crochê",
         preco: 39.90,
         descricao: "Tapete de banheiro feito de croche no formato circular na cor bege",
-        quantidade: 2
     },
     {
         id: 5,
@@ -42,7 +41,6 @@ const produtos = [
         nome: "Tapete de crochê",
         preco: 39.90,
         descricao: "Tapete de banheiro feito de croche retangular com babados floridos",
-        quantidade: 1
     },
 ];
 
@@ -50,10 +48,22 @@ export default function ListaDeDesejos() {
     return <SafeAreaView>
         <StatusBar />
         <Cabecalho />
+        <Texto style={styles.titulo}> {Carrossel.produtos.tituloProd} </Texto>
         <FlatList
             data={produtos}
             renderItem={({ item }) => (<Item {...item} />)}
             keyExtractor={({ key }) => (String(key))}
         />
     </SafeAreaView>
-}
+};
+
+const styles = StyleSheet.create({
+    titulo: {
+        paddingTop: 30,
+        paddingBottom: 10,
+        fontSize: 26,
+        fontWeight: "bold",
+        color: '#660066',
+        textAlign: 'center',
+    }
+});

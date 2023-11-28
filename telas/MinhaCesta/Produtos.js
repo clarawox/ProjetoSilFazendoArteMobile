@@ -3,7 +3,10 @@ import { FlatList, View, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Item from './Item';
+import Texto from '../../src/componentes/Texto';
+import Carrossel from '../../src/mocks/Carrossel';
 import StatusListaDesejos from '../../src/componentes/StatusListaDesejo';
+import Cabecalho from '../../src/componentes/Cabecalho';
 
 export default function MinhaCesta() {
 
@@ -24,6 +27,8 @@ export default function MinhaCesta() {
 
     return (
         <View style={styles.container}>
+            <Cabecalho/>
+            <Texto style={styles.titulo}> {Carrossel.produtos.tituloCesta} </Texto>
             <FlatList
                 data={lista}
                 renderItem={({ item }) => (<Item {...item} />)}
@@ -39,5 +44,13 @@ const styles = StyleSheet.create({
         flex: 1,
         width: "100%",
         backgroundColor: "#F2F2F2",
+    },
+    titulo: {
+        paddingTop: 30,
+        paddingBottom: 10,
+        fontSize: 26,
+        fontWeight: "bold",
+        color: '#660066',
+        textAlign: 'center',
     }
 });

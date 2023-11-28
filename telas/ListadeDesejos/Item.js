@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { View, Button, TouchableOpacity, Image } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Texto from '../../src/componentes/Texto';
-import estilosMinhaCesta from "../Minha Cesta/estilosMinhaCesta";
+import estilosMinhaCesta from "../MinhaCesta/estilosMinhaCesta";
 import CampoInteiro from "../../src/componentes/CampoInteiro";
 
 export default function Item({ id, nome, descricao, preco, img }) {

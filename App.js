@@ -4,21 +4,14 @@ import 'intl/locale-data/jsonp/pt-BR';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StatusBar, SafeAreaView, View } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import { useFonts, Montserrat_400Regular, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 
 import Imagens from './telas/Cesta';
 import SobreNos from './telas/SobreNos';
-import Produtos from './telas/Produtos';
-import MinhaCesta from './telas/Lista de Desejos/Lista';
-import ListaDeDesejos from './telas/Minha Cesta/MinhaCesta';
-
-// function Inicio() {
-//   return <SafeAreaView>
-//             <Imagens {...mock} />
-//             <StatusBar />
-//           </SafeAreaView>;
-// }
+import MinhaCesta from './telas/ListadeDesejos/Lista';
+import ListaDeDesejos from './telas/MinhaCesta/Produtos';
+import Cadastro from './telas/Login/Cadastro';
 
 const Tab = createBottomTabNavigator();
 
@@ -37,26 +30,24 @@ function TabsMenu() {
             iconName = focused
               ? 'paw'
               : 'paw-outline';
-          } else if (route.name === 'Produtos') {
-            iconName = focused
-              ? 'grid'
-              : 'grid-outline';
-
           } else if (route.name === 'Sobre nós') {
             iconName = focused
               ? 'book'
               : 'book-outline';
-          } else if (route.name === 'Lista de desejos') {
+          } else if (route.name === 'Produtos') {
             iconName = focused
-              ? 'heart'
-              : 'heart-outline';
+              ? 'grid'
+              : 'grid-outline';
           } else if (route.name === 'Minha cesta') {
             iconName = focused
-              ? 'list'
-              : 'list-outline';
+              ? 'cart'
+              : 'cart-outline';
+          } else if (route.name === 'Cadastro') {
+            iconName = focused
+              ? 'cart'
+              : 'cart-outline';
           }
 
-          // You can return any component that you like here!
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: 'white',
@@ -65,15 +56,14 @@ function TabsMenu() {
     >
       <Tab.Screen name="Inicio" component={Imagens} />
       <Tab.Screen name="Sobre nós" component={SobreNos} />
-      <Tab.Screen name="Produtos" component={Produtos} />
-      <Tab.Screen name="Lista de desejos" component={MinhaCesta} />
+      <Tab.Screen name="Produtos" component={MinhaCesta} />
       <Tab.Screen name="Minha cesta" component={ListaDeDesejos} options={{unmountOnBlur: true}}/>
+      <Tab.Screen name="Cadastro" component={Cadastro} />
     </Tab.Navigator>
   );
 }
 
 export default function App() {
-
   //Fonte utilizada para o projeto
   const [fonteCarregada] = useFonts({
     "MontSerratRegular": Montserrat_400Regular,
