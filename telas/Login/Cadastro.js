@@ -1,66 +1,64 @@
-// import React from "react";
-
-// import { View } from "react-native";
-
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { StyleSheet } from "react-native";
-
-// import Cabecalho from "../../src/componentes/Cabecalho";
-
-// export default function Cadastro() {
-//     return (
-//         <View style={styles.container}>
-//             <Cabecalho/>
-//         </View>
-//     )
-// };
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         width: "100%",
-//         backgroundColor: "#F2F2F2",
-//     },
-//     titulo: {
-//         paddingTop: 30,
-//         paddingBottom: 10,
-//         fontSize: 26,
-//         fontWeight: "bold",
-//         color: '#660066',
-//         textAlign: 'center',
-//     }
-// });
-
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import Botao from '../../src/componentes/Botao';
 import Texto from '../../src/componentes/Texto';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Cabecalho from '../../src/componentes/Cabecalho';
+import Carrossel from '../../src/mocks/Carrossel';
+import axios from 'axios';
 
 const CadastroScreen = ({ navigation }) => {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const [CEP, setCEP] = useState('');
+    const [end, setEnd] = useState('');
 
-    const handleCadastro = async () => {
+    const pegarEnd = () => {
+    
+        axios.get(`https://viacep.com.br/ws/${CEP}/json/`).then(response => {
+            const data = response.data;
+            setEnd(`${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`);
+        }).catch(error => {
+            console.error('Erro na requisição:', error);
+            setEnd('CEP não encontrado');
+        });
+    };
+
+    async function Cadastrar(nome, email, senha, CEP, end){
+        // await AsyncStorage.clear();
         try {
-            // Crie um objeto com os dados a serem salvos
-            const userData = { nome, email, senha };
+            const userData =[{
+                nome:nome,
+                email:email,
+                senha:senha,
+                CEP:CEP,
+                end:end
+            }]
+            const listaUsers = await AsyncStorage.getItem('usuario');
+            //console.log(listaUsers)
+            
+            if (listaUsers !== null) {
+                const usersSave = JSON.parse(listaUsers);
+                
+                usersSave.push({nome:nome, email:email, senha:senha, CEP:CEP, end:end})
+                
+                const listaUsersAtt = JSON.stringify(usersSave);
+                console.log(listaUsersAtt);
 
-            // Converta o objeto para uma string JSON
-            const userDataString = JSON.stringify(userData);
-
-            // Salve os dados no AsyncStorage
-            await AsyncStorage.setItem('usuario', userDataString);
-
-            // Limpe os campos após o cadastro
-            setNome('');
-            setEmail('');
-            setSenha('');
-
-            // Navegue para a próxima tela, se desejar
-            // navigation.navigate('OutraTela');
+                await AsyncStorage.setItem('usuario', listaUsersAtt);
+                setNome('');
+                setEmail('');
+                setSenha('');
+                setCEP('');
+                setEnd('')
+                navigation.navigate('Login');
+                console.log(listaUsersAtt)
+            } else {
+                console.log(userData);
+                const listaUsers = JSON.stringify(userData);
+                await AsyncStorage.setItem('usuario', listaUsers);
+            };
         } catch (error) {
             console.error('Erro ao salvar dados no AsyncStorage:', error);
         }
@@ -68,7 +66,8 @@ const CadastroScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Cabecalho/>
+            <Cabecalho />
+            <Texto style={styles.titulo}>{Carrossel.login.cadastro}</Texto>
             <TextInput
                 style={styles.input}
                 placeholder="Nome"
@@ -92,26 +91,34 @@ const CadastroScreen = ({ navigation }) => {
             />
             <TextInput
                 style={styles.input}
-                placeholder="CEP"
-                value={cep}
-                onChangeText={setCEP}
-                secureTextEntry
+                placeholder="Digite o CEP"
+                value={CEP}
+                onChangeText={text => setCEP(text)}
+                keyboardType="numeric"
             />
 
-            <Botao texto='Cadastrar' onPress={handleCadastro} />
+            <Botao texto="Buscar Endereço" onPress={pegarEnd} />
+            <Text>{end}</Text>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                <Text style={styles.link}>Já tem uma conta? Faça login!</Text>
-            </TouchableOpacity>
+            <Botao texto='Cadastrar' onPress={()=>Cadastrar(nome, email, senha, CEP, end)} />
+
         </View>
-    );
+    )
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        padding: 16,
+        width: "100%",
+        backgroundColor: "#F2F2F2",
+    },
+    titulo: {
+        paddingTop: 30,
+        paddingBottom: 10,
+        fontSize: 26,
+        fontWeight: "bold",
+        color: '#660066',
+        textAlign: 'center',
     },
     input: {
         height: 40,
@@ -119,11 +126,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 12,
         paddingLeft: 8,
-    },
-    link: {
-        marginTop: 16,
-        color: 'blue',
-        textAlign: 'center',
     },
 });
 

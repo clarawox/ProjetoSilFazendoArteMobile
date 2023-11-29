@@ -1,9 +1,9 @@
+import React, { useState } from 'react';
 import { View, StyleSheet, Image, Button, TouchableOpacity, Text } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Camera() {
-
+export default function aulaCamera() {
     //CAMERA
     const [type, setType] = useState(CameraType.back);
     const [permission, requestPermission] = Camera.useCameraPermissions();

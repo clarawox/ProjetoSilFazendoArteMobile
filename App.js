@@ -9,9 +9,11 @@ import { useFonts, Montserrat_400Regular, Montserrat_700Bold } from '@expo-googl
 
 import Imagens from './telas/Cesta';
 import SobreNos from './telas/SobreNos';
-import MinhaCesta from './telas/ListadeDesejos/Lista';
-import ListaDeDesejos from './telas/MinhaCesta/Produtos';
+import MinhaCesta from './telas/MinhaCesta/MinhaCesta';
+import Produtos from './telas/Produtos/ListaDeProd';
 import Cadastro from './telas/Login/Cadastro';
+import Login from './telas/Login/Login';
+import aulaCamera from './telas/aula/aulaCam';
 
 const Tab = createBottomTabNavigator();
 
@@ -42,10 +44,14 @@ function TabsMenu() {
             iconName = focused
               ? 'cart'
               : 'cart-outline';
-          } else if (route.name === 'Cadastro') {
+          } else if (route.name === 'Login') {
             iconName = focused
-              ? 'cart'
-              : 'cart-outline';
+              ? 'menu'
+              : 'menu-outline';
+          } else if (route.name === 'Camera') {
+            iconName = focused
+              ? 'menu'
+              : 'menu-outline';
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -56,9 +62,11 @@ function TabsMenu() {
     >
       <Tab.Screen name="Inicio" component={Imagens} />
       <Tab.Screen name="Sobre nós" component={SobreNos} />
-      <Tab.Screen name="Produtos" component={MinhaCesta} />
-      <Tab.Screen name="Minha cesta" component={ListaDeDesejos} options={{unmountOnBlur: true}}/>
-      <Tab.Screen name="Cadastro" component={Cadastro} />
+      <Tab.Screen name="Produtos" component={Produtos} />
+      <Tab.Screen name="Minha cesta" component={MinhaCesta} options={{unmountOnBlur: true}}/>
+      <Tab.Screen options={{tabBarItemStyle: {display:'none'}}} name="Cadastro" component={Cadastro} />
+      <Tab.Screen name="Login" component={Login} />
+      <Tab.Screen name="Camera" component={aulaCamera} />
     </Tab.Navigator>
   );
 }

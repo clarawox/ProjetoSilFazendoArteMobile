@@ -19,6 +19,10 @@ const Carrossel = {
     produtos:{
         tituloProd: "🐾Nossos Produtos:",
         tituloCesta: "🐾Seus Produtos:"
+    },
+    login:{
+        login: "🐾Login:",
+        cadastro: "🐾Cadastre-se:"
     }
 }
 

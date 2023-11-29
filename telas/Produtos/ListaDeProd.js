@@ -44,7 +44,7 @@ const produtos = [
     },
 ];
 
-export default function ListaDeDesejos() {
+export default function Produtos() {
     return <SafeAreaView>
         <StatusBar />
         <Cabecalho />
