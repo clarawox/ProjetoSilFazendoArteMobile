@@ -38,6 +38,10 @@ export default function aulaCamera() {
         setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
     }
 
+    const inverteExpandir = () => {
+        setViewCamera(!viewCamera);
+    };
+
     return (
         <View style={styles.container}>
             <Camera style={styles.camera} type={type} ref={cameraRef}>
