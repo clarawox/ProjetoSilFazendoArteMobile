@@ -13,7 +13,6 @@ import MinhaCesta from './telas/MinhaCesta/MinhaCesta';
 import Produtos from './telas/Produtos/ListaDeProd';
 import Cadastro from './telas/Login/Cadastro';
 import Login from './telas/Login/Login';
-import aulaCamera from './telas/aula/aulaCam';
 
 const Tab = createBottomTabNavigator();
 
@@ -48,10 +47,6 @@ function TabsMenu() {
             iconName = focused
               ? 'menu'
               : 'menu-outline';
-          } else if (route.name === 'Camera') {
-            iconName = focused
-              ? 'menu'
-              : 'menu-outline';
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -66,7 +61,6 @@ function TabsMenu() {
       <Tab.Screen name="Minha cesta" component={MinhaCesta} options={{unmountOnBlur: true}}/>
       <Tab.Screen options={{tabBarItemStyle: {display:'none'}}} name="Cadastro" component={Cadastro} />
       <Tab.Screen name="Login" component={Login} />
-      <Tab.Screen name="Camera" component={aulaCamera} />
     </Tab.Navigator>
   );
 }

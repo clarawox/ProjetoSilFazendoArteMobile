@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import Botao from '../../src/componentes/Botao';
 import Texto from '../../src/componentes/Texto';
 import AsyncStorage from '@react-native-async-storage/async-storage';

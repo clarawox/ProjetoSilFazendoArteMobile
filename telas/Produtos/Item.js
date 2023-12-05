@@ -47,7 +47,7 @@ export default function Item({ id, nome, descricao, preco, img }) {
         if (listaDesejosSalva !== null) {
             const listaDesejos = JSON.parse(listaDesejosSalva);
 
-            listaDesejos.push({ id: id, nome: nome, preco: preco, descricao: descricao, quantidade: quantidade });
+            listaDesejos.push({ id: id, img: img, nome: nome, preco: preco, descricao: descricao, quantidade: quantidade });
 
             const listaAtualizada = JSON.stringify(listaDesejos);
             await AsyncStorage.setItem('ListaDesejos', listaAtualizada);
